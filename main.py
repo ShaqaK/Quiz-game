@@ -1,21 +1,29 @@
 from question_model import Question
-from data import question_data
+import requests
 from quiz_brain import QuizBrain
+from ui import QuizInterface
+
+
+response = requests.get('https://opentdb.com/api.php?amount=10&category=18&type=boolean')
+response.raise_for_status()
+data = response.json()['results']
+
 
 question_bank = []
-quiz = QuizBrain(question_bank)
 
-for question in question_data:
-    question_text = question['text']
-    question_answer = question['answer']
+
+for question in data:
+    question_text = question['question']
+    question_answer = question['correct_answer']
     new_question = Question(text=question_text, answer=question_answer)
-    
     question_bank.append(new_question)
-#print(question_bank)
 
 quiz = QuizBrain(question_bank)
-while quiz.still_has_questions():
-    quiz.next_question()
+quiz_ui = QuizInterface(quiz)
+
+
+#while quiz.still_has_questions():
+    #quiz.next_question()
 
 
 print("You completed the Quiz!")

@@ -26,5 +26,5 @@ quiz_ui = QuizInterface(quiz)
     #quiz.next_question()
 
 
-print("You completed the Quiz!")
-print(f"Your final score was: {quiz.score} / {quiz.question_number}")
+# print("You completed the Quiz!")
+# print(f"Your final score was: {quiz.score} / {quiz.question_number}")
